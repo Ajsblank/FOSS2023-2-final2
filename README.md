@@ -30,13 +30,13 @@
 gem install i18n-js
 ```
 
-Or add the following line to your project's Gemfile:
+아니면 다음 라인을 당신의 프로젝트의 Gemfile: 에 넣으시오
 
 ```ruby
 gem "i18n-js"
 ```
 
-Create a default configuration file in ./config/i18n.yml
+기본 구성 파일을 이곳에 만드시오 ./config/i18n.yml
 
 ```bash
 i18n init
@@ -44,23 +44,22 @@ i18n init
 
 ## Usage
 
-About patterns:
+패턴에 관한 것:
 
-- Patterns can use `*` as a wildcard and can appear more than once.
-  - `*` will include everything
-  - `*.messages.*`
-- Patterns starting with `!` are excluded.
-  - `!*.activerecord.*` will exclude all ActiveRecord translations.
-- You can use groups:
-  - `{pt-BR,en}.js.*` will include only `pt-BR` and `en` translations, even if
-    more languages are available.
+- 패턴은 '*'을 와일드카드로 사용할 수 있고 한번 이상 나올 수 있습니다.
+  - `*` 모든 것을 포합합니다.
+  - `*.메세지.*`
+- '!'와 함께하는 패턴은 배제됩니다.
+  - `!*.액티브레코드.*` 모든 액티브레코드 해석을 배제합니다.
+- 그룹을 사용할 수 있습니다:
+  - `{pt-BR,en}.js.*` 은 오직`pt-BR` 과 `en` 번역만을 포함합니다. 
 
-> **Note**:
+> **참고**:
 >
-> Patterns use [glob](https://rubygems.org/gems/glob), so check it out for the
-> most up-to-date documentation about what's available.
+> 패턴은 [glob](https://rubygems.org/gems/glob) 을 사용합니다, 무엇이 이용가능한가에 대해서 최신 문서를
+> 확인해보세요.
 
-The config file:
+구성 파일:
 
 ```yml
 ---
@@ -77,16 +76,16 @@ translations:
       - "*"
 ```
 
-The output path can use the following placeholders:
+아웃풋 경로는 다음의 위치지정자를 사용할 수 있습니다:
 
-- `:locale` - the language that's being exported.
-- `:digest` - the MD5 hex digest of the exported file.
+- `:locale` - 내보내려고 하는 언어.
+- `:digest` - 내보내려는 파일의 MD5 hex digest.
 
-The example above could generate a file named
-`app/frontend/locales/en.7bdc958e33231eafb96b81e3d108eff3.json`.
+위 예제는
+`app/frontend/locales/en.7bdc958e33231eafb96b81e3d108eff3.json`라고 이름하는 파일을 생성시킬 수 있습니다.
 
-The config file is processed as erb, so you can have dynamic content on it if
-you want. The following example shows how to use groups from a variable.
+구성 파일은 erb로 처리됩니다, 동적 내용물을 erb에서 사용할 수 있게됩니다. 
+다음 예제는 변수에서 그룹을 사용하는 방법을 보여줍니다.
 
 ```yml
 ---
@@ -101,10 +100,10 @@ translations:
       - "!<%= group %>.number.nth"
 ```
 
-### Exporting locale.yml to locale.json
+### locale.yml을 locale.json에 내보내기
 
-Your i18n yaml file can be exported to JSON using the Ruby API or the command
-line utility. Examples of both approaches are provided below:
+당신의 i18n 파일은 Ruby API 나 the command line utility를 활용해서 JSON으로 내보낼 수 있습니다.
+위 두 접근에 대한 예제는 아래 제공됩니다:
 
 The Ruby API:
 
@@ -143,21 +142,19 @@ Commands:
 Run `i18n COMMAND --help` for more information on specific commands.
 ```
 
-By default, `i18n` will use `config/i18n.yml` and `config/environment.rb` as the
-configuration files. If you don't have these files, then you'll need to specify
-both `--config` and `--require`.
+기본 설정으로  `i18n`은 `config/i18n.yml` 와 `config/environment.rb`을 구성 파일들로 사용합니다.
+만약 이러한 파일이 없다면 --config` 와 `--require`을 명시할 필요가 있습니다.
 
-### Plugins
+### 플러그인
 
-#### Built-in plugins:
+#### 플러그인에 빌드:
 
 ##### `embed_fallback_translations`:
 
-Embed fallback translations inferred from the default locale. This can be useful
-in cases where you have multiple large translation files and don't want to load
-the default locale together with the target locale.
+내장된 대체 번역은 기본 로컬에서 추론됩니다. 이 방식은 다양한 복수의 큰 번역파일을 가지고 있고 
+기본 로컬을 타켓 로컬과 함께 로드하고 싶지 않을 때 유용합니다.
 
-To use it, add the following to your configuration file:
+사용하기 위해선, 구성 파일을 위해 다음 사항을 따라야 합니다:
 
 ```yaml
 ---
@@ -167,9 +164,8 @@ embed_fallback_translations:
 
 ##### `export_files`:
 
-By default, i18n-js will export only JSON files out of your translations. This
-plugin allows exporting other file formats. To use it, add the following to your
-configuration file:
+기본적으로 ii18n-js는 JSON 파일 만을 번역에서 내보냅니다. 이 플러그인은 다른 형식의 파일
+또한 내보낼 수 있게합니다. 이 것을 사용하기 위해서는 다음의 구성 파일을 추가해야 합니다: 
 
 ```yaml
 ---
@@ -180,18 +176,17 @@ export_files:
       output: "%{dir}/%{base_name}.ts"
 ```
 
-You can export multiple files by defining more entries.
+더 많은 엔트리를 정의함으로써 여러개의 파일을 내보낼 수 있습니다.
 
-The output name can use the following placeholders:
+아웃풋의 이름은 다음의 위치 지정자를 사용할 수 있습니다:
 
 - `%{dir}`: the directory where the translation file is.
 - `%{name}`: file name with extension.
 - `%{base_name}`: file name without extension.
 - `%{digest}`: MD5 hexdigest from the generated file.
 
-The template file must be a valid eRB template. You can execute arbitrary Ruby
-code, so be careful. An example of how you can generate a file can be seen
-below:
+템플릿 파일은 반드시 유효한 eRB 템플릿이 되어야 합니다. 임의의 루비 코드를 주의깊게 사용
+할 수 있습니다. 파일을 생성 하는 방법은 다음 예제에서 볼 수 있습니다:
 
 ```erb
 /* eslint-disable */
@@ -202,10 +197,10 @@ import { i18n } from "config/i18n";
 i18n.store(<%= JSON.pretty_generate(translations) %>);
 ```
 
-This template is loading the instance from `config/i18n` and storing the
-translations that have been loaded. The
-`banner(comment: "// ", include_time: true)` method is built-in. The generated
-file will look something like this:
+이 템플릿은 `config/i18n`에서 로딩되고 로드된 번역을 저장햡니다.
+`banner(comment: "// ", include_time: true)` 방법이 빌드됩니다. 생성된 파일은
+이와 같은 형태가 될 것입니다:
+
 
 ```typescript
 /* eslint-disable */
@@ -232,7 +227,7 @@ i18n.store({
 });
 ```
 
-#### Plugin API
+#### 플러그인 API
 
 You can transform the exported translations by adding plugins. A plugin must
 inherit from `I18nJS::Plugin` and can have 4 class methods (they're all optional
